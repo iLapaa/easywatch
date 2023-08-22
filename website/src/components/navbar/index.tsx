@@ -47,7 +47,11 @@ const Navigation = () => {
       },
     ];
 
-  const [selectedType, setSelectedType] = useState(window.location.pathname);
+  const [selectedType, setSelectedType] = useState("");
+
+  React.useEffect(() => {
+    setSelectedType(window.location.pathname);
+  }, [selectedType]);
 
   const ListItem = React.forwardRef<
     React.ElementRef<"a">,
@@ -60,7 +64,7 @@ const Navigation = () => {
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-              className
+              className,
             )}
             {...props}
           >
@@ -74,70 +78,6 @@ const Navigation = () => {
     );
   });
   ListItem.displayName = "ListItem";
-
-  const cardType = (type: string) => {
-    switch (type) {
-      case "Home":
-        return (
-          <a
-            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-            href="/"
-          >
-            <div className="mb-2 mt-4 text-lg font-medium">Home</div>
-            <p className="text-sm leading-tight text-muted-foreground">
-              Your Gateway to Entertainment Delight! Discover a Universe of
-              Content - From Movies and Series to Anime, Something Enchanting
-              for Every Taste and Mood.
-            </p>
-          </a>
-        );
-      case "Movies":
-        return (
-          <a
-            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-            href="/"
-          >
-            <div className="mb-2 mt-4 text-lg font-medium">Movies</div>
-            <p className="text-sm leading-tight text-muted-foreground">
-              Lights, Camera, Excitement! Unveil the Best of Cinema - Explore a
-              Collection of Latest and Classic Movie Titles for Every Film
-              Enthusiast
-            </p>
-          </a>
-        );
-      case "Series":
-        return (
-          <a
-            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-            href="/"
-          >
-            <div className="mb-2 mt-4 text-lg font-medium">Series</div>
-            <p className="text-sm leading-tight text-muted-foreground">
-              Unforgettable TV Journeys Await! Delve into a World of Series -
-              Dive into Upcoming Seasons or Catch Up on the Latest Episodes of
-              Your Favorite Shows.
-            </p>
-          </a>
-        );
-
-      case "Anime":
-        return (
-          <a
-            className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-            href="/"
-          >
-            <div className="mb-2 mt-4 text-lg font-medium">Anime</div>
-            <p className="text-sm leading-tight text-muted-foreground">
-              Enter the Enchanting Realm of Anime! From Anticipated Releases to
-              Beloved Classics, Immerse Yourself in a Universe of Animated
-              Adventures and Emotions
-            </p>
-          </a>
-        );
-    }
-  };
-
-  const [card, setCard] = useState();
 
   return (
     <NavigationMenu>
@@ -171,8 +111,8 @@ const Navigation = () => {
 
 export default function Navbar() {
   return (
-    <nav className="w-100 h-20 light:bg-fuchsia-800 dark:bg-indigo-950">
-      <div className="flex justify-between items-center h-full container">
+    <nav className="w-100 light:bg-fuchsia-800 h-20 dark:bg-indigo-950">
+      <div className="container flex h-full items-center justify-between">
         <h1>EASYWATCH</h1>
         <Navigation />
 
