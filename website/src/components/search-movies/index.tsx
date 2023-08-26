@@ -23,7 +23,7 @@ interface Movie {
 
 export default function SearchBar() {
   const [search, setSearch] = useState("Search movies");
-  const [movies, setMovies] = useState<Movie[] | null>(null); // Replace 'Movie' with your actual movie type
+  const [movies, setMovies] = useState<Movie[] | null>(null);
   const [loading, isLoading] = useState(false);
 
   const handleChange = async (event: any) => {
