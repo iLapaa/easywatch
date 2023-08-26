@@ -17,6 +17,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import SearchBar from "../search-movies";
+import { Button } from "../ui/button";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const Navigation = () => {
   const streamingTypes: { type: string; href: string; description: string }[] =
@@ -111,13 +114,22 @@ const Navigation = () => {
 
 export default function Navbar() {
   return (
-    <nav className="w-100 light:bg-fuchsia-800 h-20 dark:bg-indigo-950">
-      <div className="container flex h-full items-center justify-between">
-        <h1>EASYWATCH</h1>
-        <Navigation />
+    <>
+      <nav className="w-100 light:bg-fuchsia-800 h-20 dark:bg-indigo-950">
+        <div className="container flex h-full items-center justify-between">
+          <h1>EASYWATCH</h1>
+          <Navigation />
 
-        <UserButton userProfileMode="modal" afterSignOutUrl="/" />
-      </div>
-    </nav>
+          <div className="flex">
+            <Link href="/search">
+              <Button className="bg-transparent text-white outline-zinc-200 transition hover:scale-150 hover:bg-transparent">
+                <MagnifyingGlassIcon />
+              </Button>
+            </Link>
+            <UserButton userProfileMode="modal" afterSignOutUrl="/" />
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }
