@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Movie {
+  id                     Int      @id @default(autoincrement())
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime
+  tmdbId                 Int      @unique
+  imdbId                 String   @unique
+  title                  String   @db.VarChar(256)
+  originalTitle          String?  @db.VarChar(256)
+  language               String?
+  releaseYear            Int?
+  releaseDate            String?
+  genres                 String[]
+  plot                   String   @db.VarChar(4096)
+  runtime                Int
+  adult                  Boolean  @default(false)
+  budget                 String?
+  revenue                String?
+  homepage               String?  @db.VarChar(511)
+  status                 String
+  mpaaRating             String?
+  keywords               String[] @default([])
+  countriesOfOrigin      String[] @default([])
+  languages              String[] @default([])
+  cast                   String[] @default([])
+  director               String?
+  production             String?
+  awardsSummary          String?
+  posterUrl              String?  @db.VarChar(512)
+  posterPlaceholderUrl   String?  @db.VarChar(4096)
+  posterWidth            Int?
+  posterHeight           Int?
+  backdropUrl            String?  @db.VarChar(512)
+  backdropPlaceholderUrl String?  @db.VarChar(4096)
+  backdropWidth          Int?
+  backdropHeight         Int?
+  trailerUrl             String?  @db.VarChar(512)
+  trailerYouTubeId       String?
+  imdbRating             Float?
+  imdbVotes              Int?
+  imdbType               String?
+  tmdbPopularity         Float?
+  tmdbRating             Float?
+  tmdbVotes              Int?
+  metacriticRating       Float?
+  metacriticVotes        Int?
+  rtCriticRating         Int?
+  rtCriticVotes          Int?
+  rtAudienceRating       Int?
+  rtAudienceVotes        Int?
+  rtCriticsConsensus     String?  @db.VarChar(1024)
+  rtId                   String?
+  emsId                  String?
+  rtUrl                  String?
+  letterboxdScore        Int?
+  letterboxdVotes        Int?
+  flickMetrixScore       Int?
+  flickMetrixId          Int?
+  foreign                Boolean? @default(false)
+  relevancyScore         Float?
+  imdbCustomPopularity   Float?
+  searchL                String?  @db.VarChar(2048)
+
+  @@index([imdbId])
+  @@index([imdbRating, releaseYear, foreign, genres, searchL, relevancyScore])
+  @@index([imdbVotes])
+  @@index([releaseDate])
+  @@index([rtAudienceRating])
+  @@index([rtCriticRating])
+  @@index([tmdbId])
+  @@index([tmdbPopularity])
+}
