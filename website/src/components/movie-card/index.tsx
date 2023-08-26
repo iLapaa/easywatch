@@ -4,18 +4,23 @@ import Rating from "./rating";
 import Time from "./time";
 import Link from "next/link";
 
-interface IMovieCardProps {
+interface IMovieCardProps extends HTMLButtonElement {
   movieUrl: string;
+  image: string;
+  title: string;
 }
 
-export default function MovieCard({ movieUrl }: IMovieCardProps) {
+export default function MovieCard({ movieUrl, image, title }: IMovieCardProps) {
   return (
     <>
       <Link href={movieUrl}>
         <div className="relative h-[230px] w-[160px] max-w-xs overflow-hidden rounded-xl bg-cover bg-no-repeat">
           <Image
             className="absolute hover:scale-110"
-            src={movieImg}
+            src={image}
+            width={160}
+            height={230}
+            layout="responsive"
             alt="image"
           />
           <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden opacity-0 transition duration-300 ease-in-out hover:opacity-100">
@@ -29,7 +34,7 @@ export default function MovieCard({ movieUrl }: IMovieCardProps) {
                 <Rating rating={4} />
               </div>
               <div className="absolute top-44">
-                <p>Harry Potter</p>
+                <p>{title}</p>
               </div>
             </div>
           </div>
